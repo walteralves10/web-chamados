@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#"><b>Gerenciamento de chamados<br></b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarPrimarySupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbarPrimarySupportedContent">
+        <a class="btn navbar-btn ml-2 btn-secondary" href="login.html"> sair<br></a>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2" style="">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center"> Chamados pendentes<br><span class="badge badge-pill badge-primary align-items-start justify-content-between d-inline-flex flex-row">4</span></a>
+            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">Chamados em andamento<br><span class="badge badge-pill badge-primary">4</span></a>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Chamados encerrados<br><span class="badge badge-pill badge-primary">4</span></a>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Chamados com fila&nbsp;prioridade<br><span class="badge badge-pill badge-primary">4</span></a><a href="contactSupport.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Contato<br></a><a href="login.html" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">Sair<br></a>
+          </div>
+        </div>
+        <div class="col-md-6" style="">
+          <div class="list-group">
+            <a href="detailsOccurrence.html" class="list-group-item list-group-item-action active"> nome - cidade - ocorrência</a>
+            <a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a>
+            <a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a>
+            <a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a><a href="#" class="list-group-item list-group-item-action">nome - cidade - ocorrência</a>
+          </div>
+        </div>
+        <div class="col-md-4" style="">
+          <label>Descrição<br></label>
+          <div class="form-group h-25">
+            <textarea type="text" name="description
+description" class="form-control h-100" placeholder="Descrição" style=""></textarea>
+          </div><label>Status<br>
+            <div class="form-group"><select class="form-control">
+                <option value="1">pendente</option>
+                <option value="2">andamento</option>
+                <option value="3">encerrado</option>
+                <option value="4">fila de prioridade</option>
+              </select></div>
+          </label>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12 p-2"><iframe width="100%" height="200" src="https://maps.google.com/maps?q=New%20York&amp;z=14&amp;output=embed" scrolling="no" frameborder="0"></iframe></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</body>
+
+</html>
