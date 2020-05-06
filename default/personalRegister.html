@@ -30,18 +30,21 @@
         <div class="mx-auto col-md-6 bg-white p-5 col-10">
           <h1 class="mb-4">Registro pessoal<br></h1>
           <form>
-            <div class="form-group"> <input type="text" class="form-control" placeholder="Primeiro nome" id="form9">
-              <div class="form-group"><input type="text" class="form-control" placeholder="Sobrenome" id="form9">
-                <div class="form-group"><input type="text" class="form-control" placeholder="Seu nome de usuário" id="form9">
-                  <div class="form-group"><input type="email" class="form-control" placeholder="Seu email" id="form9"></div>
-                </div>
-              </div>
+            <div class="form-group">
+                <!--<div class="form-group"></div>
+                <div class="form-group"></div>
+                <div class="form-group"></div> -->
+                <input type="text"     class="form-control" placeholder="Nome completo"   id="nameCompletInput">
+
+                <input type="email"    class="form-control" placeholder="Seu email"       id="emailInput">
+                
+                <input type="password" class="form-control" placeholder="Senha"           id="passwordInput">
+                
+                <input type="password" class="form-control" placeholder="Confirmar Senha" id="confirmPasswordInput">
+                
+                <small class="form-text text-muted text-right"></small>
+                <button class="btn btn-primary" id="btnSubmit">Submit</button>
             </div>
-            <div class="form-group mb-3">
-              <div class="form-group"><input type="password" class="form-control" placeholder="Senha" id="form10"></div>
-              <div class="form-group"><input type="password" class="form-control" placeholder="Confirmar Senha" id="form10"></div> <small class="form-text text-muted text-right"></small>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
       </div>

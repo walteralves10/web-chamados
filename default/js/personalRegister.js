@@ -1,21 +1,24 @@
-var userList = document.getElementById('userList');
-var firstNameInput = document.getElementById('firstName');
-var lastNameInput  = document.getElementById('lastName');
-var emailInput     = document.getElementById('emailInput');
-//var passwordInput = document.getElementById('passwordInput');
-var btnLogin =document.getElementById('btnLogin');
+var userList             = document.getElementById('userList');
 
-btnLogin.addEventListener('click', function(){
-    create(emailInput.value, passwordInput.value);
+var nameCompletInput       = document.getElementById('NameCompletInput');
+var emailInput           = document.getElementById('emailInput');
+
+var passwordInput        = document.getElementById('passwordInput');
+var confirmPasswordInput = document.getElementById('confirmPasswordInput');
+
+var btnSubmit            = document.getElementById('btnSubmit');
+
+btnSubmit.addEventListener('click', function(){
+
+    create(nameCompletInput.value, emailInput.value);
 });
 
 // Adicionando um json ao banco
-function create(email, password){
+function create(name, email){
     var data = {
-        email: email,
-        password: password
-    };
-
+        name: name,
+        email: email
+    }
     return firebase.database().ref().child('users').push(data);
 }
 // Listar users do banco atraves de um snapshot
@@ -23,7 +26,7 @@ firebase.database().ref('users').on('value', function(snapshot) {
     userList.innerHTML = '';
     snapshot.forEach(function(item) {
         var li = document.createElement('li');
-        li.appendChild(document.createTextNode(item.val().email + ': ' + item.val().password));
+        li.appendChild(document.createTextNode(item.val().email + ': ' + item.val().name));
         userList.appendChild(li);
     });
 });
