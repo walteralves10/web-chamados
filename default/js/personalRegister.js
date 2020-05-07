@@ -10,24 +10,49 @@ var btnSubmit            = document.getElementById('btnSubmit');
 
 btnSubmit.addEventListener('click', function(){
     var data = {
-        email: emailInput.value,
         name: nameCompletInput.value,
-        status: 1
-    }
-    var auth = {
         email: emailInput.value,
-        password: passwordInput.value
+        status: 1
     }
 
     if(validatePassword(passwordInput.value, confirmPasswordInput.value) 
         && validaEmail(emailInput.value)){
 
-        createUserFirebase(auth)
+            firebase
+            .auth()
+            .createUserWithEmailAndPassword(data.email, data.password)
+            .then( function () {
+                alert('New user created!');
+                createNewPerson(data);
+            }).catch(function (error) {
+                console.error(error.code);
+                console.error(error.massage);
+                alert('Falha ao cadastrar !');
+            });
+
+        //createUserFirebase(data);
         //createNewPerson(data);
-    }else{
-        alert('Email invalido ou Senhas diferentes !');
     }
 });
+
+// cria novo usuario
+/*function createUserFirebase(data){
+    var email           = document.getElementById('emailInput').value;
+    var password        = document.getElementById('passwordInput').value;
+
+    firebase
+        .auth()
+        .createUserWithEmailAndPassword(data.email, data.password)
+        .then( function (){
+            alert('New user created!');
+            createNewPerson(data);
+        })
+        .catch(function (error) {
+            console.error(error.code);
+            console.error(error.massage);
+            alert('Falha ao cadastrar !');
+        });
+}*/
 
 // Adicionando um json ao banco
 function createNewPerson(data){
@@ -37,9 +62,11 @@ function createNewPerson(data){
 //valida inputs de senhas
 function validatePassword(pass1, pass2){
     if(pass1 != pass2){
+        alert("senhas diferentes");
         return false;
     }
     if (pass1.length < 7 && pass2.length < 7){
+        alert("Tamanho da senha invalido (maior que 8 digitos) ! ");
         return false;
     }
 
@@ -66,20 +93,9 @@ function validaEmail(field){
         return true;
     }else{
         //document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
-        //alert("E-mail invalido");
+        alert("E-mail invalido");
         return false;
     }
-}
-
-function createUserFirebase(auth){
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(auth.email, auth.password)
-        .catch(function (error) {
-            console.error(error.code);
-            console.error(error.massage);
-            alert('Falha ao cadastrar !');
-        });
 }
 // Listar users do banco atraves de um snapshot
 firebase.database().ref('person').on('value', function(snapshot) {
