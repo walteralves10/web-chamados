@@ -13,6 +13,7 @@ btnLogin.addEventListener('click', function(){
             console.log(result);
             displayName.innerText = 'Bem vindo, ' +  emailInput.value;
             alert('Bem vindo ' +  emailInput.value);
+            window.location.href = 'dashboard.html';
         })
         .catch(function (error) {
             // Handle Errors here.
