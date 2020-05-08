@@ -1,3 +1,4 @@
+(function(){
     // Your web app's Firebase configuration
     var firebaseConfig = {
       apiKey: "AIzaSyD6N-Uvcf3VL9DRravzrRkqPMHbSTbVmYw",
@@ -8,7 +9,7 @@
       messagingSenderId: "334925411143",
       appId: "1:334925411143:web:8555ccfb63c8bb6e941262",
       measurementId: "G-LEW60NWYFK"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      firebase.analytics();
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+})()

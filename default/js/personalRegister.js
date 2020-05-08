@@ -1,72 +1,55 @@
-var userList             = document.getElementById('userList');
+//var userList             = document.getElementById('userList');
 
+//inputs
 var nameCompletInput     = document.getElementById('nameCompletInput');
 var emailInput           = document.getElementById('emailInput');
-
 var passwordInput        = document.getElementById('passwordInput');
-var confirmPasswordInput = document.getElementById('confirmPasswordInput');
 
+//button
 var btnSubmit            = document.getElementById('btnSubmit');
 
+// Novo user
 btnSubmit.addEventListener('click', function(){
+    createUserFirebase();
+    createNewPerson();
+});
+
+/*cria novo usuario*/ 
+function createUserFirebase(){
+    firebase
+    .auth()
+    .createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
+    .then(function(){
+        alert('Bem vindo ' +  emailInput.value);
+        //return true;
+    })
+    .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert('erro ao auth!' + errorMessage + errorCode);
+        //return false;
+    });
+}
+
+/*Adicionando um json ao banco*/ 
+function createNewPerson(){
+
     var data = {
         name: nameCompletInput.value,
         email: emailInput.value,
         status: 1
     }
 
-    if(validatePassword(passwordInput.value, confirmPasswordInput.value) 
-        && validaEmail(emailInput.value)){
-
-            firebase
-            .auth()
-            .createUserWithEmailAndPassword(data.email, data.password)
-            .then( function () {
-                alert('New user created!');
-                createNewPerson(data);
-            }).catch(function (error) {
-                console.error(error.code);
-                console.error(error.massage);
-                alert('Falha ao cadastrar !');
-            });
-
-        //createUserFirebase(data);
-        //createNewPerson(data);
-    }
-});
-
-// cria novo usuario
-/*function createUserFirebase(data){
-    var email           = document.getElementById('emailInput').value;
-    var password        = document.getElementById('passwordInput').value;
-
-    firebase
-        .auth()
-        .createUserWithEmailAndPassword(data.email, data.password)
-        .then( function (){
-            alert('New user created!');
-            createNewPerson(data);
-        })
-        .catch(function (error) {
-            console.error(error.code);
-            console.error(error.massage);
-            alert('Falha ao cadastrar !');
-        });
-}*/
-
-// Adicionando um json ao banco
-function createNewPerson(data){
     return firebase.database().ref().child('person').push(data);
 }
 
+
+
 //valida inputs de senhas
-function validatePassword(pass1, pass2){
-    if(pass1 != pass2){
-        alert("senhas diferentes");
-        return false;
-    }
-    if (pass1.length < 7 && pass2.length < 7){
-        alert("Tamanho da senha invalido (maior que 8 digitos) ! ");
+function validatePassword(pass){
+    if (pass.length < 5 ){
+        alert("Tamanho da senha invalido (maior que 5 digitos) ! ");
         return false;
     }
 
@@ -88,21 +71,20 @@ function validaEmail(field){
         (dominio.indexOf(".") >=1)&& 
         (dominio.lastIndexOf(".") < dominio.length - 1)) {
 
-        //document.getElementById("msgemail").innerHTML="E-mail válido";
-        //alert("E-mail valido");
         return true;
     }else{
-        //document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
+        
         alert("E-mail invalido");
         return false;
     }
 }
-// Listar users do banco atraves de um snapshot
-firebase.database().ref('person').on('value', function(snapshot) {
-    userList.innerHTML = '';
-    snapshot.forEach(function(item) {
-        var li = document.createElement('li');
-        li.appendChild(document.createTextNode(item.val().email + ': ' + item.val().name));
-        userList.appendChild(li);
-    });
-});
+
+/* Listar users do banco atraves de um snapshot
+    firebase.database().ref('person').on('value', function(snapshot) {
+        userList.innerHTML = '';
+        snapshot.forEach(function(item) {
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(item.val().email + ': ' + item.val().name));
+            userList.appendChild(li);
+        });
+    });*/
