@@ -1,10 +1,15 @@
-
 //button
 var btnSair = document.getElementById('btnSair');
 //div
 var divList = document.getElementById('divList');
+var listPendentes = document.getElementById('list-pendentes');
+//a
+var listSair = document.getElementById('listSair');
+
 
 btnSair.addEventListener('click', function(){
+    alert('teste');
+    
     firebase
         .auth()
         .signOut()
@@ -17,10 +22,10 @@ btnSair.addEventListener('click', function(){
 
 /* Listar users do banco atraves de um snapshot
     firebase.database().ref('person').on('value', function(snapshot) {
-        userList.innerHTML = '';
+        listPendentes.innerHTML = '';
         snapshot.forEach(function(item) {
-            var li = document.createElement('li');
+            var li = document.createElement('button');
             li.appendChild(document.createTextNode(item.val().email + ': ' + item.val().name));
-            userList.appendChild(li);
+            userList.appendChild(button);
         });
     });*/
