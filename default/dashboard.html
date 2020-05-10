@@ -50,8 +50,12 @@
           <div class="tab-content" id="nav-tabContent" >
 
             <div class="tab-pane fade show active" id="list-pendentes" role="tabpanel" aria-labelledby="list-pendentes-list">
-              <button type="button" class="list-group-item list-group-item-action">nome - cidade - ocorrência</button>
-              <button type="button" class="list-group-item list-group-item-action" data-="">dale</button>
+              <!--<button 
+                onclick="console.log(this)" 
+                data='{"nome":  "nome", "cidade": "cidade", "ocorrencia": "ocorrencia"}' 
+                type="button" class="list-group-item list-group-item-action">
+                nome - cidade - ocorrência</button>
+              <button type="button" class="list-group-item list-group-item-action" data-="">dale</button>-->
             </div>
 
             <div class="tab-pane fade" id="list-andamento" role="tabpanel" aria-labelledby="list-andamento-list">
@@ -72,8 +76,7 @@
         <div class="col-md-4" >
           <label>Descrição<br></label>
           <div class="form-group h-25">
-            <textarea type="text" name="description
-              description" class="form-control h-100" placeholder="Descrição" ></textarea>
+            <textarea type="text" name="description" id="description" class="form-control h-100" placeholder="Descrição" ></textarea>
           </div><label>Status<br>
             <div class="form-group"><select class="form-control">
                 <option value="1">pendente</option>
@@ -102,6 +105,13 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- Add Firebase products that you want to use -->
+
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+  <script src="js/firebase.js"> </script>
+  <script src="js/dashboard.js"> </script>
 </body>
 
 </html>
