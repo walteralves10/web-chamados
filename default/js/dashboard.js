@@ -8,22 +8,40 @@ var listSair = document.getElementById('listSair');
 
 
 btnSair.addEventListener('click', function(){
-    alert('teste');
+    //alert('teste');
     
     firebase
         .auth()
         .signOut()
         .then( function () {
             alert('Você se deslogou');
+            window.location.href = 'index.html';
         }, function (error){
             console.error(error);
         });
 });
 
+listSair.addEventListener('click', function(){
+    firebase
+    .auth()
+    .signOut()
+    .then( function () {
+        alert('Você se deslogou');
+        window.location.href = 'index.html';
+    }, function (error){
+        console.error(error);
+    });
+});
+
 function clickItemPendentes(item){
     //alert(item);
     //console.log(item);
-    document.getElementById('description').value = item.name;
+    document.getElementById('description').value = item.description;
+    //document.getElementById('status').value = item.status;
+    /**
+     * latitude
+     * longitude
+     */
 }
 
 function renderListPendentes(listsPendentes){
@@ -37,13 +55,13 @@ function renderListPendentes(listsPendentes){
 
         button.setAttribute('class','list-group-item list-group-item-action');
         button.setAttribute('data', JSON.stringify(item));
-        button.appendChild(document.createTextNode(item.val().email + ' - ' + item.val().name));
+        button.appendChild(document.createTextNode(item.val().description /*+ ' - ' + item.val().infoId*/));
         listPendentes.appendChild(button);
     });
 }
 
-/* Listar users do banco atraves de um snapshot*/
-    firebase.database().ref('person').on('value', function(snapshot) {
+/* Listar urgencys do banco atraves de um snapshot*/
+    firebase.database().ref('person/'+'T0ZdsAxOlaNJVn4e65qpjUL0Zkf1').child('urgency').on('value', function(snapshot) {
         //alert('lista');
         renderListPendentes(snapshot);
     });
