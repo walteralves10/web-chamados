@@ -78,7 +78,7 @@ function clickItemPendentes(item){
      */
 }
 
-function renderListPendentes(listsPendentes){
+function renderListPendentes(listsPendentes, pessoas){
     listPendentes.innerHTML = '';
     listsPendentes.forEach(function(item) {
         var button = document.createElement('button');
@@ -87,6 +87,7 @@ function renderListPendentes(listsPendentes){
             clickItemPendentes(JSON.parse(event.target.getAttribute('data')));
         });
 
+        console.log(pessoas);
         button.setAttribute('class','list-group-item list-group-item-action');
         button.setAttribute('data', JSON.stringify(item));
         button.appendChild(document.createTextNode(item.val().description));
@@ -112,7 +113,7 @@ function addLatLog(person){
 
 /* Listar urgencys do banco atraves de um snapshot*/
     firebase.database().ref('urgency/').on('value', function(snapshot) {
-        renderListPendentes(snapshot);
+        renderListPendentes(snapshot, JSON.parse(localStorage.getItem("login")));
     });
 
     /*
