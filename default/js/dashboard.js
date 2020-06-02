@@ -41,18 +41,14 @@ function markerMap(){
 btnSair.addEventListener('click', function(){
     //alert('teste');
     
-    firebase
-        .auth()
-        .signOut()
-        .then( function () {
-            alert('Você se deslogou');
-            window.location.href = 'index.html';
-        }, function (error){
-            console.error(error);
-        });
+    signOut();
 });
 
 listSair.addEventListener('click', function(){
+    signOut();
+});
+
+function signOut(){
     firebase
     .auth()
     .signOut()
@@ -62,7 +58,7 @@ listSair.addEventListener('click', function(){
     }, function (error){
         console.error(error);
     });
-});
+}
 
 function clickItemPendentes(item){
     //alert(item);
