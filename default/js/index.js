@@ -6,6 +6,14 @@ var passwordInput        = document.getElementById('passwordInput');
 var btnLogin            = document.getElementById('btnLogin');
 var arrayLogin = [];
 
+this.onEmailSearchFinish = new Event('emailsearch'); 
+
+this.addEventListener('emailsearch', e => {
+
+    window.location.href = 'dashboard.html';
+
+});
+
 btnLogin.addEventListener('click', function(){
     /*
                 validaUsuario();
@@ -15,7 +23,10 @@ btnLogin.addEventListener('click', function(){
                 window.location.href = 'dashboard.html';
      */
     signIn();
+    
+    
 });
+
 
 function signIn(){
 
@@ -27,7 +38,8 @@ function signIn(){
         displayName.innerText = 'Bem vindo, ' +  emailInput.value;
         alert('Bem vindo ' +  emailInput.value);
         validaUsuario();
-        window.location.href = 'dashboard.html';
+         
+        
         // dados 
     })
     .catch(function (error) {
@@ -51,10 +63,13 @@ function returnStatus(email){
                 arrayLogin.push(item.val().status);
 
                 console.log(arrayLogin);
+                document.cookie = `token=${arrayLogin};`;
                 localStorage.setItem("login", arrayLogin);
+                this.dispatchEvent(this.onEmailSearchFinish);
             }
             
         });
+        
     });
     
     //return arrayLogin;
@@ -72,3 +87,4 @@ function validaUsuario(){
        console.log("meu cu");
     }
 }
+
