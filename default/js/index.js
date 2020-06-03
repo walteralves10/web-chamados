@@ -3,7 +3,7 @@ var displayName          = document.getElementById('displayName');
 var emailInput           = document.getElementById('emailInput');
 var passwordInput        = document.getElementById('passwordInput');
 
-var btnLogin            = document.getElementById('btnLogin');
+this.btnLogin            = document.getElementById('btnLogin');
 var arrayLogin = [];
 
 this.onEmailSearchFinish = new Event('emailsearch'); 
@@ -11,10 +11,11 @@ this.onEmailSearchFinish = new Event('emailsearch');
 this.addEventListener('emailsearch', e => {
 
     window.location.href = 'dashboard.html';
+    this.btnLogin.removeEventListener('click');
 
 });
 
-btnLogin.addEventListener('click', function(){
+this.btnLogin.addEventListener('click', function(){
     /*
                 validaUsuario();
 
