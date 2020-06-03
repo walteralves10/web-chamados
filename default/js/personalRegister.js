@@ -10,8 +10,12 @@ var btnSubmit            = document.getElementById('btnSubmit');
 
 // Novo user
 btnSubmit.addEventListener('click', function(){
+   if(validaEmail(emailInput.value) && validatePassword(passwordInput.value)){
+
     createUserFirebase();
     createNewPerson();
+
+   }
 });
 
 /*cria novo usuario*/ 
@@ -49,7 +53,7 @@ function createNewPerson(){
 //valida inputs de senhas
 function validatePassword(pass){
     if (pass.length < 5 ){
-        alert("Tamanho da senha invalido (maior que 5 digitos) ! ");
+        alert("Tamanho da senha invalido (menor que 5 digitos) ! ");
         return false;
     }
 

@@ -109,7 +109,7 @@ function addLatLog(person){
 
 /* Listar urgencys do banco atraves de um snapshot*/
     firebase.database().ref('urgency/').on('value', function(snapshot) {
-        renderListPendentes(snapshot, JSON.parse(localStorage.getItem("login")));
+        //renderListPendentes(snapshot, JSON.parse(localStorage.getItem("login")));
     });
 
     /*
