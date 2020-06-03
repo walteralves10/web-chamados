@@ -8,6 +8,7 @@ var listSair = document.getElementById('listSair');
 
 var myLatLng = {lat: 0, lng: 0};
 var map;
+this.chamadosPendentes = document.getElementById('list-pendentes-list-span');
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -76,7 +77,11 @@ function clickItemPendentes(item){
 
 function renderListPendentes(listsPendentes, pessoas){
     listPendentes.innerHTML = '';
+    let i = 0;
     listsPendentes.forEach(function(item) {
+
+        i++;
+        this.chamadosPendentes.innerHTML = i;
         var button = document.createElement('button');
 
         button.addEventListener('click', function(event){
@@ -107,9 +112,29 @@ function addLatLog(person){
     initMap();
 }
 
+function getCookie(cname) {
+
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
 /* Listar urgencys do banco atraves de um snapshot*/
-    firebase.database().ref('urgency/').on('value', function(snapshot) {
-        //renderListPendentes(snapshot, JSON.parse(localStorage.getItem("login")));
+    firebase.database().ref('urgency/').once('value').then(snapshot => {
+
+        this.cookie = getCookie('token').split(',');
+        renderListPendentes(snapshot, this.cookie[1]);
+
     });
 
     /*
