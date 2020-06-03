@@ -7,16 +7,14 @@ var btnLogin            = document.getElementById('btnLogin');
 var arrayLogin = [];
 
 btnLogin.addEventListener('click', function(){
-    /**
+    /*
                 validaUsuario();
 
                 displayName.innerText = 'Bem vindo, ' +  emailInput.value;
                 alert('Bem vindo ' +  emailInput.value);
                 window.location.href = 'dashboard.html';
-
      */
     signIn();
-    validaUsuario();
 });
 
 function signIn(){
@@ -28,7 +26,8 @@ function signIn(){
         
         displayName.innerText = 'Bem vindo, ' +  emailInput.value;
         alert('Bem vindo ' +  emailInput.value);
-
+        validaUsuario();
+        window.location.href = 'dashboard.html';
         // dados 
     })
     .catch(function (error) {
@@ -68,7 +67,6 @@ function validaUsuario(){
         user.providerData.forEach(function (profile) {
             console.log("meu cu true da true");
             returnStatus(profile.email);
-
         });
     }else {
        console.log("meu cu");
