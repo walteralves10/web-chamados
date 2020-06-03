@@ -81,11 +81,11 @@ function validaUsuario(){
     var user = firebase.auth().currentUser;
     if (user != null) {
         user.providerData.forEach(function (profile) {
-            console.log("meu cu true da true");
+            
             returnStatus(profile.email);
         });
     }else {
-       console.log("meu cu");
+       alert("Usuario não cadastrado !");
     }
 }
 

@@ -75,24 +75,32 @@ function clickItemPendentes(item){
      */
 }
 
-function renderListPendentes(listsPendentes, pessoas){
+function renderListPendentes(listsPendentes, status){
     listPendentes.innerHTML = '';
     let i = 0;
     listsPendentes.forEach(function(item) {
 
-        i++;
-        this.chamadosPendentes.innerHTML = i;
         var button = document.createElement('button');
 
         button.addEventListener('click', function(event){
             clickItemPendentes(JSON.parse(event.target.getAttribute('data')));
         });
 
-        console.log(pessoas);
-        button.setAttribute('class','list-group-item list-group-item-action');
-        button.setAttribute('data', JSON.stringify(item));
-        button.appendChild(document.createTextNode(item.val().description));
-        listPendentes.appendChild(button);
+        console.log(status + item.val().samu);
+        if (status == 1 && item.val().samu == 1){
+            i++;
+            this.chamadosPendentes.innerHTML = i;
+
+            button.setAttribute('class','list-group-item list-group-item-action');
+            button.setAttribute('data', JSON.stringify(item));
+            button.appendChild(document.createTextNode(item.val().description));
+            listPendentes.appendChild(button);
+
+        }
+        if (status == 2 && item.val().amt == 1){}
+        if (status == 3 && item.val().fireFighter == 1){}
+        if (status == 4 && item.val().pm == 1){}
+
     });
 }
 
