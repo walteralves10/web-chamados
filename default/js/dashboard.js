@@ -371,9 +371,10 @@ function getDatabaseUrgency(option){
 
 
     /*
-            snapshot.forEach(function(item) {
-            
-        });
-            var button = document.createElement('button');
-            button.appendChild(document.createTextNode(item.val().email + ': ' + item.val().name));
-            userList.appendChild(button);*/
+        Validar se email existe no cookie, caso não (vooltar para tela de login)
+        Colocar nome e cidade da pessoa no button
+        atualização automatica dos botões de list
+        arrumar layout detalha urgencias
+        Adicionar imagens e videos    
+        fazer update dos chamados
+    */
