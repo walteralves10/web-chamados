@@ -84,7 +84,7 @@ function validaEmail(field){
 }
 
 /* Listar users do banco atraves de um snapshot
-    firebase.database().ref('person').on('value', function(snapshot) {
+    firebase.database().ref('urgency').on('value', function(snapshot) {
         userList.innerHTML = '';
         snapshot.forEach(function(item) {
             var li = document.createElement('li');
