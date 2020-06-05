@@ -372,6 +372,7 @@ function getDatabaseUrgency(option){
 
     /*
         Validar se email existe no cookie, caso não (vooltar para tela de login)
+  
         Colocar nome e cidade da pessoa no button
         atualização automatica dos botões de list
         arrumar layout detalha urgencias
