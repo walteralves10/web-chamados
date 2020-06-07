@@ -22,11 +22,11 @@
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
-      <a class="navbar-brand" ><b>Gerenciamento de chamados<br></b></a>
+      <a class="navbar-brand text-light" ><b>Gerenciamento de chamados<br></b></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarPrimarySupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse text-center justify-content-end" id="navbarPrimarySupportedContent">
-        <a class="btn navbar-btn ml-2 btn-secondary" id="btnSair" > sair<br></a>
+        <a class="btn navbar-btn ml-2 btn-secondary text-light  " id="btnSair" > sair<br></a>
       </div>
     </div>
   </nav>
@@ -88,7 +88,9 @@
           <label>Descrição<br></label>
           <div class="form-group h-25">
             <textarea type="text" name="description" id="description" class="form-control h-100" placeholder="Descrição" ></textarea>
-          </div><label>Status<br>
+          </div>
+          <label>Status<br>
+
             <div class="form-group">
               <select class="form-control" id="status">
                 <option value="0">pendente</option>
@@ -99,18 +101,22 @@
             </div>
           </label>
           
-          <div id="map">
-            <!--<div class="row">
-              <div class="row">
-                <div class="col-md-12 p-2">
-                  <iframe width="100%" height="200" 
+          
+            <!--<div class="row">-->
+              <!--<div class="row">-->
+                <!--<div class="col-md-12 h-60">-->
+              <div class="form-group h-60" id="map">
+                <!--<div class="row h-60" >-->
+                  <!--<iframe width="100%" height="200" 
                   src="https://maps.google.com/maps?q='+'-17.7955723'+','+'-50.9463489'+'&hl=es&z=14&amp;output=embed" 
                     scrolling="no" frameborder="0">
-                  </iframe>
-                </div>
+                  </iframe>-->
+                <!--</div>-->
               </div>
-            </div>-->
-          </div>
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <button class="btn btn-primary m-2" id="btnLogin">Salvar<br></button>
         </div>
       </div>
     </div>

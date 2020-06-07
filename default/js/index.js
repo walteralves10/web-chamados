@@ -37,7 +37,7 @@ function signIn(){
     .then(function (result) {
         
         displayName.innerText = 'Bem vindo, ' +  emailInput.value;
-        alert('Bem vindo ' +  emailInput.value);
+        //alert('Bem vindo ' +  emailInput.value);
         validaUsuario();
          
         
