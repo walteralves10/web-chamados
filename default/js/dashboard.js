@@ -22,9 +22,18 @@ this.SpanContPrioridade = document.getElementById('list-prioridade-list-span');
 this.SpanContEncerrados = document.getElementById('list-encerrado-list-span');
 //a
 var listSair = document.getElementById('listSair');
-//object
-this.valueButton = {};
 
+
+btnSubmit.addEventListener('click', function(){ //da update do item no firbase contribuição do jão
+    this.valueButton = JSON.parse(sessionStorage.getItem("item"));
+    this.valueButton.description = document.getElementById('description').value;
+    this.valueButton.status = Number(document.getElementById('status').value);
+    updateFirebase(this.valueButton);
+});
+
+
+
+//localização fodase
 var myLatLng = {lat: 0, lng: 0};
 var map;
 
@@ -57,14 +66,7 @@ listEncerradosList.addEventListener('click', function(){
     getDatabaseUrgency(3);
 });
 
-btnSubmit.addEventListener('click', function(){
-    console.log(this.valueButton);
-    console.log("cu do jao");
-    this.valueButton.description = document.getElementById('description').value;
-    this.valueButton.status = document.getElementById('status').value;
 
-    updateFirebase();
-});
 
 btnSair.addEventListener('click', function(){
     signOut();
@@ -90,8 +92,7 @@ function signOut(){
 function clickItem(item){
     //alert(item);
     //console.log(item);
-    this.valueButton = item;
-    console.log(this.valueButton);
+    this.buttonValue = item;
 
     document.getElementById('description').value = item.description;
     
@@ -102,11 +103,16 @@ function clickItem(item){
      * latitude
      * longitude
      */
+    sessionStorage.setItem("item", JSON.stringify(this.buttonValue));
 
 }
 
-function updateFirebase(){
-    firebase.database().ref('urgency/'+this.valueButton.infoId).update(this.valueButton);
+//event 
+
+
+function updateFirebase(valueButton){
+    console.log(valueButton);
+    firebase.database().ref('urgency/').child(valueButton.infoId).update(valueButton);
 }
 
 function renderListPendentes(listsPendentes, status){
