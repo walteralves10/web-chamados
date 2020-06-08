@@ -65,7 +65,7 @@ function returnStatus(email){
 
                 console.log(arrayLogin);
                 document.cookie = `token=${arrayLogin};`;
-                localStorage.setItem("login", arrayLogin);
+                //localStorage.setItem("login", arrayLogin);
                 this.dispatchEvent(this.onEmailSearchFinish);
             }
             
