@@ -100,7 +100,16 @@ function clickItem(item){
 
     document.getElementById('description').innerHTML = item.description;
 
-    uploadImg(item.picture);
+    if(! (item.picture == null)){
+        alert(item.picture);
+        uploadImg(item.picture);
+    }
+    if(!(item.video == null)){
+        alert(item.video);
+        uploadVideo(item.video);
+    }
+    
+    
 
     document.getElementById('status').value = item.status;
     /**
@@ -111,15 +120,40 @@ function clickItem(item){
 
 }
 
-function uploadImg(urlImg){
-    console.log(urlImg);
-    var httpsReference = firebase.storage().refFromURL(urlImg);
+function uploadVideo(urlVideo){
+    console.log(urlVideo);
+    var httpsReference = firebase.storage().refFromURL(urlVideo);
     console.log(httpsReference);
     
     httpsReference.getDownloadURL().then(function(url) {
-        // `url` is the download URL for 'images/stars.jpg'
+        /* `url` is the download URL for 'images/stars.jpg'
       
-        /* This can be downloaded directly:
+         This can be downloaded directly:
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();*/
+      
+        // Or inserted into an <img> element:
+        var video = document.getElementById('video');
+        video.src = url;
+      }).catch(function(error) {
+        // Handle any errors
+      });
+}
+
+function uploadImg(urlImg){
+    //console.log(urlImg);
+    var httpsReference = firebase.storage().refFromURL(urlImg);
+    //console.log(httpsReference);
+    
+    httpsReference.getDownloadURL().then(function(url) {
+        /* `url` is the download URL for 'images/stars.jpg'
+      
+         This can be downloaded directly:
         var xhr = new XMLHttpRequest();
         xhr.responseType = 'blob';
         xhr.onload = function(event) {
