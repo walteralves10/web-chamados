@@ -23,19 +23,10 @@ this.SpanContEncerrados = document.getElementById('list-encerrado-list-span');
 //a
 var listSair = document.getElementById('listSair');
 
-
-btnSubmit.addEventListener('click', function(){ //da update do item no firbase contribuição do jão
-    this.valueButton = JSON.parse(sessionStorage.getItem("item"));
-    this.valueButton.description = document.getElementById('description').value;
-    this.valueButton.status = Number(document.getElementById('status').value);
-    updateFirebase(this.valueButton);
-});
-
-
-
-//localização fodase
+//localização
 var myLatLng = {lat: 0, lng: 0};
 var map;
+var geocoder; 
 
 sessionLogin();
 
@@ -46,10 +37,12 @@ function initMap() {
         zoom: 17
     });
 
+    geocoder = new google.maps.Geocoder;
+
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: 'Hello World!'
+        title: 'Estou Aqui!'
     });
 }
 
@@ -66,12 +59,15 @@ listEncerradosList.addEventListener('click', function(){
     getDatabaseUrgency(3);
 });
 
-
-
+btnSubmit.addEventListener('click', function(){ //da update do item no firbase contribuição do jão
+    this.valueButton = JSON.parse(sessionStorage.getItem("item"));
+    this.valueButton.description = document.getElementById('description').value;
+    this.valueButton.status = Number(document.getElementById('status').value);
+    updateFirebase(this.valueButton);
+});
 btnSair.addEventListener('click', function(){
     signOut();
 });
-
 listSair.addEventListener('click', function(){
     signOut();
 });
@@ -94,7 +90,9 @@ function clickItem(item){
     //console.log(item);
     this.buttonValue = item;
 
-    document.getElementById('description').value = item.description;
+    document.getElementById('date').innerHTML = item.dataPedido + " - " + item.horaPedido;
+
+    document.getElementById('description').innerHTML = item.description;
     
     searchPerson(item.personId);
 
@@ -106,9 +104,6 @@ function clickItem(item){
     sessionStorage.setItem("item", JSON.stringify(this.buttonValue));
 
 }
-
-//event 
-
 
 function updateFirebase(valueButton){
     console.log(valueButton);
@@ -254,16 +249,27 @@ function renderListEncerrado(dataEncerrados, status){
 }
 
 function setButtons(button, item, i, span){
-    span.innerHTML = i;
+    //console.log(item.val());
+    //console.log(item.val().personId);
+    firebase.database().ref('person/').child(item.val().personId).on('value', function(snapshot) {
+        
+        span.innerHTML = i;
 
-    button.setAttribute('class','list-group-item list-group-item-action');
-    button.setAttribute('data', JSON.stringify(item));
-    button.appendChild(document.createTextNode(item.val().description + " - " + item.val().dataPedido));
+        button.setAttribute('class','list-group-item list-group-item-action');
+        button.setAttribute('data', JSON.stringify(item));
+        
+        button.appendChild(document.createTextNode(
+            item.val().titleAbstract + " - " + 
+            item.val().dataPedido  + " - " +
+            snapshot.val().name));
+        
+    });
+
     return button;
 }
 
 function searchPerson(idPerson){
-    firebase.database().ref('person/' + idPerson)/*.child('urgency')*/.on('value', function(snapshot) {
+    firebase.database().ref('person/' + idPerson).on('value', function(snapshot) {
         //alert('lista');
         addLatLog(JSON.parse(JSON.stringify(snapshot)));
     });
@@ -274,6 +280,21 @@ function addLatLog(person){
         lat: Number(person.latitude), 
         lng: Number(person.longitude)
     };
+
+    document.getElementById('person').innerHTML = person.name;
+
+    geocoder.geocode({'location': myLatLng}, function(results, status) {
+        if (status === 'OK') {
+          if (results[0]) {
+            document.getElementById('address').innerHTML = results[0].formatted_address;
+
+          } else {
+            window.alert('No results found');
+          }
+        } else {
+          window.alert('Geocoder failed due to: ' + status);
+        }
+      });
 
     initMap();
 }
@@ -348,8 +369,9 @@ function sessionLogin(){
         Validar se email existe no cookie, caso não (vooltar para tela de login) - ok
   
         Colocar nome e cidade da pessoa no button
-        atualização automatica dos botões de list ok
         arrumar layout detalha urgencias
-        Adicionar imagens e videos    
-        fazer update dos chamados
+        Adicionar imagens e videos
+
+        atualização automatica dos botões de list ok
+        fazer update dos chamados ok
     */
