@@ -62,7 +62,7 @@ listEncerradosList.addEventListener('click', function(){
     getDatabaseUrgency(3);
 });
 
-btnSubmit.addEventListener('click', function(){ //da update do item no firbase contribuição do jão
+btnSubmit.addEventListener('click', function(){ //da update do item no firbase 
     this.valueButton = JSON.parse(sessionStorage.getItem("item"));
     this.valueButton.medicalInfo = document.getElementById('medicalInfo').value;
     this.valueButton.description = document.getElementById('description').innerHTML;
@@ -95,10 +95,12 @@ function clickItem(item){
     this.buttonValue = item;
 
     document.getElementById('date').innerHTML = item.dataPedido + " - " + item.horaPedido;
-
-    document.getElementById('description').innerHTML = item.description;
     
     searchPerson(item.personId);
+
+    document.getElementById('description').innerHTML = item.description;
+
+    uploadImg(item.picture);
 
     document.getElementById('status').value = item.status;
     /**
@@ -107,6 +109,31 @@ function clickItem(item){
      */
     sessionStorage.setItem("item", JSON.stringify(this.buttonValue));
 
+}
+
+function uploadImg(urlImg){
+    console.log(urlImg);
+    var httpsReference = firebase.storage().refFromURL(urlImg);
+    console.log(httpsReference);
+    
+    httpsReference.getDownloadURL().then(function(url) {
+        // `url` is the download URL for 'images/stars.jpg'
+      
+        /* This can be downloaded directly:
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function(event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();*/
+      
+        // Or inserted into an <img> element:
+        var img = document.getElementById('img');
+        img.src = url;
+      }).catch(function(error) {
+        // Handle any errors
+      });
 }
 
 function updateFirebase(valueButton){
@@ -380,8 +407,8 @@ function sessionLogin(){
     /*
         Validar se email existe no cookie, caso não (vooltar para tela de login) - ok
   
-        Colocar nome e cidade da pessoa no button
-        arrumar layout detalha urgencias
+        Colocar nome e cidade da pessoa no button ok
+        arrumar layout detalha urgencias ok
         Adicionar imagens e videos
 
         atualização automatica dos botões de list ok
