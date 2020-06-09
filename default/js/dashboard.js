@@ -28,6 +28,9 @@ var myLatLng = {lat: 0, lng: 0};
 var map;
 var geocoder; 
 
+//event
+this.onPersonSearchFinish = new Event('personsearch'); 
+
 sessionLogin();
 
 function initMap() {
@@ -61,7 +64,8 @@ listEncerradosList.addEventListener('click', function(){
 
 btnSubmit.addEventListener('click', function(){ //da update do item no firbase contribuição do jão
     this.valueButton = JSON.parse(sessionStorage.getItem("item"));
-    this.valueButton.description = document.getElementById('description').value;
+    this.valueButton.medicalInfo = document.getElementById('medicalInfo').value;
+    this.valueButton.description = document.getElementById('description').innerHTML;
     this.valueButton.status = Number(document.getElementById('status').value);
     updateFirebase(this.valueButton);
 });
@@ -123,24 +127,25 @@ function renderListPendentes(listsPendentes, status){
 
         //console.log(status + item.val().samu);
         //i++;
+        firebase.database().ref('person/').child(item.val().personId).once('value').then(function(snapshot){
+            if (status == 1 && item.val().samu == 1 && item.val().status == 0){
+                i++;
+                listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes, snapshot.val().name));
 
-        if (status == 1 && item.val().samu == 1 && item.val().status == 0){
-            i++;
-            listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes));
-
-        }
-        if (status == 2 && item.val().amt == 1 && item.val().status == 0){
-            i++;
-            listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes));
-        }
-        if (status == 3 && item.val().fireFighter == 1 && item.val().status == 0){
-            i++;
-            listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes));
-        }
-        if (status == 4 && item.val().pm == 1 && item.val().status == 0){
-            i++;
-            listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes));
-        }
+            }
+            if (status == 2 && item.val().amt == 1 && item.val().status == 0){
+                i++;
+                listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes, snapshot.val().name));
+            }
+            if (status == 3 && item.val().fireFighter == 1 && item.val().status == 0){
+                i++;
+                listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes, snapshot.val().name));
+            }
+            if (status == 4 && item.val().pm == 1 && item.val().status == 0){
+                i++;
+                listPendentes.appendChild(setButtons(button, item, i, this.SpanContPendentes, snapshot.val().name));
+            }
+        });
 
     });
 }
@@ -158,24 +163,25 @@ function renderListAndamento(dataAndamento, status){
 
         //console.log(status + item.val().samu);
         //i++;
+        firebase.database().ref('person/').child(item.val().personId).once('value').then(function(snapshot){
+            if (status == 1 && item.val().samu == 1 && item.val().status == 1){
+                i++;
+                buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento, snapshot.val().name));
 
-        if (status == 1 && item.val().samu == 1 && item.val().status == 1){
-            i++;
-            buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento));
-
-        }
-        if (status == 2 && item.val().amt == 1 && item.val().status == 1){
-            i++;
-            buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento));
-        }
-        if (status == 3 && item.val().fireFighter == 1 && item.val().status == 1){
-            i++;
-            buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento));
-        }
-        if (status == 4 && item.val().pm == 1 && item.val().status == 1){
-            i++;
-            buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento));
-        }
+            }
+            if (status == 2 && item.val().amt == 1 && item.val().status == 1){
+                i++;
+                buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento, snapshot.val().name));
+            }
+            if (status == 3 && item.val().fireFighter == 1 && item.val().status == 1){
+                i++;
+                buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento, snapshot.val().name));
+            }
+            if (status == 4 && item.val().pm == 1 && item.val().status == 1){
+                i++;
+                buttonAndamento.appendChild(setButtons(button, item, i, this.SpanContAndamento, snapshot.val().name));
+            }
+        });
 
     });
 }
@@ -193,24 +199,25 @@ function renderListPrioridade(dataPrioridade, status){
 
         //console.log(status + item.val().samu);
         //i++;
+        firebase.database().ref('person/').child(item.val().personId).once('value').then(function(snapshot){
+            if (status == 1 && item.val().samu == 1 && item.val().status == 2){
+                i++;
+                buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade, snapshot.val().name));
 
-        if (status == 1 && item.val().samu == 1 && item.val().status == 2){
-            i++;
-            buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade));
-
-        }
-        if (status == 2 && item.val().amt == 1 && item.val().status == 2){
-            i++;
-            buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade));
-        }
-        if (status == 3 && item.val().fireFighter == 1 && item.val().status == 2){
-            i++;
-            buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade));
-        }
-        if (status == 4 && item.val().pm == 1 && item.val().status == 2){
-            i++;
-            buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade));
-        }
+            }
+            if (status == 2 && item.val().amt == 1 && item.val().status == 2){
+                i++;
+                buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade, snapshot.val().name));
+            }
+            if (status == 3 && item.val().fireFighter == 1 && item.val().status == 2){
+                i++;
+                buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade, snapshot.val().name));
+            }
+            if (status == 4 && item.val().pm == 1 && item.val().status == 2){
+                i++;
+                buttonPrioridade.appendChild(setButtons(button, item, i, this.SpanContPrioridade, snapshot.val().name));
+            }
+        });
 
     });
 }
@@ -227,32 +234,33 @@ function renderListEncerrado(dataEncerrados, status){
         });
 
         //console.log(status + item.val().samu);
-
-        if (status == 1 && item.val().samu == 1 && item.val().status == 3){
-            i++;
-            buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados));
-        }
-        if (status == 2 && item.val().amt == 1 && item.val().status == 3){
-            i++;
-            buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados));
-        }
-        if (status == 3 && item.val().fireFighter == 1 && item.val().status == 3){
-            i++;
-            buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados));
-        }
-        if (status == 4 && item.val().pm == 1 && item.val().status == 3){
-            i++;
-            buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados));
-        }
+        firebase.database().ref('person/').child(item.val().personId).once('value').then(function(snapshot){
+            if (status == 1 && item.val().samu == 1 && item.val().status == 3){
+                i++;
+                buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados, snapshot.val().name));
+            }
+            if (status == 2 && item.val().amt == 1 && item.val().status == 3){
+                i++;
+                buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados, snapshot.val().name));
+            }
+            if (status == 3 && item.val().fireFighter == 1 && item.val().status == 3){
+                i++;
+                buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados, snapshot.val().name));
+            }
+            if (status == 4 && item.val().pm == 1 && item.val().status == 3){
+                i++;
+                buttonEncerrados.appendChild(setButtons(button, item, i, this.SpanContEncerrados, snapshot.val().name));
+            }
+        });
 
     });
 }
 
-function setButtons(button, item, i, span){
+function setButtons(button, item, i, span, name = null){
     //console.log(item.val());
     //console.log(item.val().personId);
-    firebase.database().ref('person/').child(item.val().personId).on('value', function(snapshot) {
-        
+   
+
         span.innerHTML = i;
 
         button.setAttribute('class','list-group-item list-group-item-action');
@@ -261,11 +269,15 @@ function setButtons(button, item, i, span){
         button.appendChild(document.createTextNode(
             item.val().titleAbstract + " - " + 
             item.val().dataPedido  + " - " +
-            snapshot.val().name));
-        
-    });
+            name));
+            
+            this.dispatchEvent(this.onPersonSearchFinish);
+            return button;
+            
 
-    return button;
+     
+    
+   
 }
 
 function searchPerson(idPerson){
