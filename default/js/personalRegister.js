@@ -5,6 +5,9 @@ var nameCompletInput     = document.getElementById('nameCompletInput');
 var emailInput           = document.getElementById('emailInput');
 var passwordInput        = document.getElementById('passwordInput');
 
+//select 
+var tipo                 = document.getElementById('tipo');
+
 //button
 var btnSubmit            = document.getElementById('btnSubmit');
 
@@ -16,6 +19,7 @@ btnSubmit.addEventListener('click', function(){
     createNewPerson();
 
    }
+   clearHTML();
 });
 
 /*cria novo usuario*/ 
@@ -42,8 +46,10 @@ function createNewPerson(){
     var data = {
         name: nameCompletInput.value,
         email: emailInput.value,
-        status: 1
+        status: tipo.value
     }
+
+    console.log(data);
 
     return firebase.database().ref().child('person').push(data);
 }
@@ -81,6 +87,15 @@ function validaEmail(field){
         alert("E-mail invalido");
         return false;
     }
+}
+
+
+function clearHTML(){
+    document.getElementById('nameCompletInput').value = '';
+    document.getElementById('emailInput').value = '';
+    document.getElementById('passwordInput').value = '';
+    
+    document.getElementById('tipo').value = 1;
 }
 
 /* Listar users do banco atraves de um snapshot

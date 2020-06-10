@@ -40,7 +40,7 @@ function newPassword(emailAddress){
     
     auth.sendPasswordResetEmail(emailAddress.value).then(function() {
       // Email sent.
-      alert("E-mail enviado !");
+      alert("E-mail para alteração de senha enviado !");
     }).catch(function(error) {
       // An error happened.
       alert("Erro ao enviar e-mail !");

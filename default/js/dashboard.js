@@ -50,15 +50,19 @@ function initMap() {
 }
 
 listPendentesList.addEventListener('click', function(){
+    clearDetail()
     getDatabaseUrgency(0);
 });
 listAndamentoList.addEventListener('click', function(){
+    clearDetail()
     getDatabaseUrgency(1);
 });
 listPrioridadeList.addEventListener('click', function(){
+    clearDetail()
     getDatabaseUrgency(2);
 });
 listEncerradosList.addEventListener('click', function(){
+    clearDetail()
     getDatabaseUrgency(3);
 });
 
@@ -68,6 +72,7 @@ btnSubmit.addEventListener('click', function(){ //da update do item no firbase
     this.valueButton.description = document.getElementById('description').innerHTML;
     this.valueButton.status = Number(document.getElementById('status').value);
     updateFirebase(this.valueButton);
+    clearDetail();
 });
 btnSair.addEventListener('click', function(){
     signOut();
@@ -90,54 +95,35 @@ function signOut(){
 }
 
 function clickItem(item){
-    //alert(item);
-    //console.log(item);
+    clearDetail();
+
     this.buttonValue = item;
 
     document.getElementById('date').innerHTML = item.dataPedido + " - " + item.horaPedido;
-    
-    searchPerson(item.personId);
 
     document.getElementById('description').innerHTML = item.description;
 
+    searchPerson(item.personId);
+
     if(! (item.picture == null)){
-        alert(item.picture);
         uploadImg(item.picture);
     }
     if(!(item.video == null)){
-        alert(item.video);
         uploadVideo(item.video);
     }
-    
-    
 
     document.getElementById('status').value = item.status;
-    /**
-     * latitude
-     * longitude
-     */
+    
+    document.getElementById('medicalInfo').value = item.medicalInfo;
+
     sessionStorage.setItem("item", JSON.stringify(this.buttonValue));
 
 }
 
 function uploadVideo(urlVideo){
-    console.log(urlVideo);
     var httpsReference = firebase.storage().refFromURL(urlVideo);
-    console.log(httpsReference);
     
     httpsReference.getDownloadURL().then(function(url) {
-        /* `url` is the download URL for 'images/stars.jpg'
-      
-         This can be downloaded directly:
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function(event) {
-          var blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();*/
-      
-        // Or inserted into an <img> element:
         var video = document.getElementById('video');
         video.src = url;
       }).catch(function(error) {
@@ -146,23 +132,9 @@ function uploadVideo(urlVideo){
 }
 
 function uploadImg(urlImg){
-    //console.log(urlImg);
     var httpsReference = firebase.storage().refFromURL(urlImg);
-    //console.log(httpsReference);
     
     httpsReference.getDownloadURL().then(function(url) {
-        /* `url` is the download URL for 'images/stars.jpg'
-      
-         This can be downloaded directly:
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function(event) {
-          var blob = xhr.response;
-        };
-        xhr.open('GET', url);
-        xhr.send();*/
-      
-        // Or inserted into an <img> element:
         var img = document.getElementById('img');
         img.src = url;
       }).catch(function(error) {
@@ -171,8 +143,25 @@ function uploadImg(urlImg){
 }
 
 function updateFirebase(valueButton){
-    console.log(valueButton);
     firebase.database().ref('urgency/').child(valueButton.infoId).update(valueButton);
+}
+
+function clearDetail(){
+    document.getElementById('date').innerHTML = "";
+
+    document.getElementById('medicalInfo').value = "";
+
+    document.getElementById('person').innerHTML = "";
+
+    document.getElementById('address').innerHTML = "";
+
+    document.getElementById('description').innerHTML = "";
+
+    var iframe = document.getElementById('video');
+    iframe.src = '';
+
+    var img = document.getElementById('img');
+    img.src = '';
 }
 
 function renderListPendentes(listsPendentes, status){
@@ -439,11 +428,13 @@ function sessionLogin(){
 
 
     /*
+        limpar campos ao clicar
+
         Validar se email existe no cookie, caso não (vooltar para tela de login) - ok
   
         Colocar nome e cidade da pessoa no button ok
         arrumar layout detalha urgencias ok
-        Adicionar imagens e videos
+        Adicionar imagens e videos ok
 
         atualização automatica dos botões de list ok
         fazer update dos chamados ok
