@@ -1,0 +1,23 @@
+{
+  "name": "web-chamados",
+  "version": "1.0.0",
+  "description": "\"# web-chamamdos\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walteralves10/web-chamados.git"
+  },
+  "author": "Walter Alves Rezende",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walteralves10/web-chamados/issues"
+  },
+  "homepage": "https://github.com/walteralves10/web-chamados#readme",
+  "dependencies": {
+    "express": "4.x.x"
+  }
+}

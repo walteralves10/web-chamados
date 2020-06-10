@@ -413,9 +413,9 @@ function sessionLogin(){
     }
 }
 
-/*window.addEventListener("beforeunload", function(e){
+window.addEventListener("beforeunload", function(e){
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
- }, false);*/
+ }, false);
 
 /* Listar urgencys do banco atraves de um snapshot*/
     firebase.database().ref('urgency/').on('value', function(snapshot) {
